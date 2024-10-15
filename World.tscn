@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://qk38r0usjhhn"]
+
+[ext_resource type="Script" path="res://Rope.gd" id="1_cfn6o"]
+[ext_resource type="Texture2D" uid="uid://6t82mu1ul6ka" path="res://Icon.svg" id="2_pxm5u"]
+[ext_resource type="Script" path="res://Anchor1.gd" id="3_unop8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_as3t4"]
+radius = 33.2415
+
+[node name="World" type="Node2D"]
+
+[node name="Obstacle1" type="StaticBody2D" parent="."]
+position = Vector2(519, 310)
+
+[node name="Icon" type="Sprite2D" parent="Obstacle1"]
+scale = Vector2(0.53125, 0.53125)
+texture = ExtResource("2_pxm5u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle1"]
+shape = SubResource("CircleShape2D_as3t4")
+
+[node name="Obstacle2" type="StaticBody2D" parent="."]
+position = Vector2(731, 325)
+
+[node name="Icon" type="Sprite2D" parent="Obstacle2"]
+position = Vector2(1.00002, 6.07967e-06)
+scale = Vector2(0.527588, 0.527588)
+texture = ExtResource("2_pxm5u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
+shape = SubResource("CircleShape2D_as3t4")
+
+[node name="Rope" type="Node2D" parent="."]
+script = ExtResource("1_cfn6o")
+
+[node name="Line" type="Line2D" parent="Rope"]
+joint_mode = 2
+
+[node name="Anchor1" type="Sprite2D" parent="."]
+position = Vector2(365.5, 435.5)
+scale = Vector2(0.523438, 0.523438)
+texture = ExtResource("2_pxm5u")
+script = ExtResource("3_unop8")
