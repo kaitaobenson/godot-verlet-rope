@@ -1,13 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://qk38r0usjhhn"]
+[gd_scene load_steps=8 format=3 uid="uid://qk38r0usjhhn"]
 
 [ext_resource type="Script" path="res://Rope.gd" id="1_cfn6o"]
+[ext_resource type="Script" path="res://DebugRenderer.gd" id="2_8emvb"]
 [ext_resource type="Texture2D" uid="uid://6t82mu1ul6ka" path="res://Icon.svg" id="2_pxm5u"]
 [ext_resource type="Script" path="res://Anchor1.gd" id="3_unop8"]
+[ext_resource type="Script" path="res://FpsLabel.gd" id="4_o3p4r"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_as3t4"]
-radius = 33.2415
+[sub_resource type="CircleShape2D" id="CircleShape2D_gk5g6"]
+radius = 73.9824
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jgd1w"]
+radius = 33.0
 
 [node name="World" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FpsLabel" type="Label" parent="CanvasLayer"]
+offset_right = 238.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 60
+text = "FPS: 60"
+script = ExtResource("4_o3p4r")
+
+[node name="DebugDrawer" type="Node2D" parent="CanvasLayer"]
+z_index = -3
+script = ExtResource("2_8emvb")
 
 [node name="Obstacle1" type="StaticBody2D" parent="."]
 position = Vector2(519, 310)
@@ -17,23 +35,29 @@ scale = Vector2(0.53125, 0.53125)
 texture = ExtResource("2_pxm5u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle1"]
-shape = SubResource("CircleShape2D_as3t4")
+position = Vector2(0, 1)
+rotation = -2.14181
+shape = SubResource("CircleShape2D_gk5g6")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Obstacle1"]
+polygon = PackedVector2Array(-435, 101, -279, -232, -305, -28, -180, -29, -224, 175)
 
 [node name="Obstacle2" type="StaticBody2D" parent="."]
 position = Vector2(731, 325)
 
 [node name="Icon" type="Sprite2D" parent="Obstacle2"]
-position = Vector2(1.00002, 6.07967e-06)
+position = Vector2(1, 0)
 scale = Vector2(0.527588, 0.527588)
 texture = ExtResource("2_pxm5u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacle2"]
-shape = SubResource("CircleShape2D_as3t4")
+shape = SubResource("CircleShape2D_jgd1w")
 
 [node name="Rope" type="Node2D" parent="."]
 script = ExtResource("1_cfn6o")
 
 [node name="Line" type="Line2D" parent="Rope"]
+width = 5.0
 joint_mode = 2
 
 [node name="Anchor1" type="Sprite2D" parent="."]
